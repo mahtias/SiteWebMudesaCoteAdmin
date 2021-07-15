@@ -1,7 +1,10 @@
 
 import Login from '../../views/auth/Login.vue'
 import Logout from '../../views/auth/Logout.vue'
-import users from "../../views/dossierUsers/users.vue"
+//import users from "../../views/dossierUsers/users.vue"
+import TableauBordGenerale from "../../views/dashbord/TableauBordGenerale.vue";
+import messageInfo from "../../views/auth/DossierInfo/messageInfo.vue"
+import fichierJoint from "../../views/auth/DossierFichier/fichierJoint.vue"
 
 const AuthRoutes = [
     {
@@ -17,11 +20,29 @@ const AuthRoutes = [
      meta: { requiresAuth: true }  
 
    },
+  //  {
+  //    path:"/creation-user",
+  //    name:"uesr",
+  //    component:users
+  //  },
+
    {
-     path:"/creation-user",
-     name:"uesr",
-     component:users
-   }
+    path: "/table-de-bord",
+    name: "TableauBordGenerale",
+    component: TableauBordGenerale
+},
+{
+    path:"/message-info",
+    name:"message",
+    component:messageInfo
+  },
+  {
+    path:"/fichier-joint",
+    name:"fichier_join",
+    component:fichierJoint
+  }
+
+  
    
 ]
 

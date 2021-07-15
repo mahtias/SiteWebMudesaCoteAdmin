@@ -11,14 +11,13 @@
                 <slot />
             </div>
 
-           <footer class="footer">
-                <div class="container-fluid">
-                   
-                    <div class="copyright pull-left">
-                     copyright   2020, tous  droit reservé    par <a href="https://www.themekita.com">AKouaTechnology</a>
-                    </div>
-                </div>
-            </footer>
+           <footer class="main-footer">
+    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 3.0.1
+    </div>
+  </footer>
         </div>
 
      
