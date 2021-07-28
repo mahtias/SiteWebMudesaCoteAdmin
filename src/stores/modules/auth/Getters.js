@@ -17,6 +17,11 @@ export const gettersUserRole = state => state.userRole
 export const gettersUsers = state => state.users
 export const gettersMessages = state =>state.messages
 export const gettersFichierJoints = state=>state.fichierJoints
+export const gettersListeAderhent = state=>state.listeAderents
+export const gettersListeCeremonie =state=>state.listeCeremonies
+export const gettersListeOrgSocio = state => state.listeOrgSocios
+export const gettersListeImage = state =>state.listeImages
+export const gettersListeVideo = state => state.listeVideos
 
 
 

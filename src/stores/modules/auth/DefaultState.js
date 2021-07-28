@@ -12,7 +12,12 @@ const defaultstate = {
     userRole:[],
     users:[],
     messages:[],
-    fichierJoints:[]
+    fichierJoints:[],
+    listeAderents:[],
+    listeCeremonies:[],
+    listeOrgSocios:[],
+    listeImages:[],
+    listeVideos:[]
     
 
 

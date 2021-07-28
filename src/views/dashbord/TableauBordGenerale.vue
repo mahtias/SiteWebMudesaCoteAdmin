@@ -29,9 +29,9 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3>{{afficherLaTailleDuItem}}</h3>
 
-                <p>New Orders</p>
+                <p>Adhérant</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
@@ -306,7 +306,7 @@
 </template>
 
 <script>
-// import {mapGetters,mapActions} from "vuex";
+ import {mapGetters,mapActions} from "vuex";
 // import {formatageSomme} from "../../repositories/repository";
     export default {
 		name: "TableauBordGenerale",
@@ -319,22 +319,24 @@
 		created(){
 
 		},
-// 		computed:{
-//  ...mapGetters("Utilisateurs", ["gettersBudget","gettersPlanActivite" ]),
+		computed:{
 
+    ...mapGetters("Utilisateurs",[ "gettersListeAderhent"]),
+   
+      afficherLaTailleDuItem(){
+           return this.gettersListeAderhent.length;
+        
+          
+    },
+		},
+		methods:{
+...mapActions("Utilisateurs", []),
 
-// 			afficherMontantBudget(){
-		
-// 			return this.gettersBudget.reduce((prec, cur) => parseFloat(prec) + parseFloat(cur.montant), 0)	
-		
-// 	}
+ 
+   
 
-// 		},
-// 		methods:{
-// ...mapActions("Utilisateurs", []),
-
-// formatageSomme:formatageSomme,
-// 		}
+//formatageSomme:formatageSomme,
+		}
     }
 </script>
 

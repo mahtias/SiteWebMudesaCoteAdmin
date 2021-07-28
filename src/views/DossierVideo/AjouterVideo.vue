@@ -5,29 +5,25 @@
           <div class="col-md-6" >
          <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Ajouter le rapport de la reunion</h3>
+                <h3 class="card-title">Ajout de la video</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
               <form role="form">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Date du rapport</label>
-                    <input type="date" v-model="formImg.date_rapport" class="form-control" id="exampleInputEmail1" placeholder="">
+                    <label for="exampleInputEmail1">Date</label>
+                    <input type="date" v-model="formImg.date" class="form-control" id="exampleInputEmail1" placeholder="">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputPassword1">Heure du rapport</label>
-                    <input type="time" v-model="formImg.heure_rapport" class="form-control" id="exampleInputPassword1" placeholder="">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputFile">fichier joind</label>
+                    <label for="exampleInputFile">fichier video</label>
                     <div class="input-group">
                       <div class="custom-file">
                         <input type="file" class="custom-file-input" id="exampleInputFile"  @change="OnchangeFichier">
-                        <label class="custom-file-label" for="exampleInputFile">Choisir le fichier</label>
+                        <label class="custom-file-label" for="exampleInputFile">Choisir la video</label>
                       </div>
                       <div class="input-group-append">
-                        <span class="input-group-text" id="">Uploader le fichier</span>
+                        <span class="input-group-text" id="">Uploader la video</span>
                       </div>
                     </div>
                   </div>
@@ -36,9 +32,9 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="" class="btn btn-primary" @click.prevent="ajouterFichierJoinLocal">Valider</button>
+                  <button type="" class="btn btn-primary" @click.prevent="ajouterVideoLocal">Valider</button>
 
-                  <button style="margin-left:300px;" class="btn btn-danger" @click.prevent="allerPage">Fermer</button>
+                  <button  style="margin-left:300px;" class="btn btn-danger" @click.prevent="allerPage">Fermer</button>
                 </div>
               </form>
             </div>
@@ -53,8 +49,8 @@ export default {
     data() {
         return{
      formImg:{
-         date_rapport:"",
-         heure_rapport:""
+         date:"",
+         //heure_rapport:""
      },
      imagePDF:"",
       namePDF:"",
@@ -68,37 +64,30 @@ export default {
 
     },
     computed:{
-...mapGetters("Utilisateurs",["gettersFichierJoints"]),
+...mapGetters("Utilisateurs",["gettersListeImage"]),
 
     },
     methods:{
-        ...mapActions("Utilisateurs",["ajouterFichier"]),
+        ...mapActions("Utilisateurs",["ajouterVideo"]),
 
-        allerPage(){
-          this.$router.push({
-            name:'liste_fichier'
-          })
-        },
-
-         ajouterFichierJoinLocal(){
+         ajouterVideoLocal(){
                 const formData = new FormData();
-                formData.append('fichier_join', this.selectedFile, this.selectedFile.name);
-                formData.append('date_rapport', this.formImg.date_rapport);
-                formData.append('heure_rapport', this.formImg.heure_rapport);
+                formData.append('fichier', this.selectedFile, this.selectedFile.name);
+                formData.append('date', this.formImg.date);
                
                 let config = {
                     header : {
                         'Content-Type' : 'multipart/form-data'
                     }
                 }
-                this.ajouterFichier(formData,config)
+                this.ajouterVideo(formData,config)
                 this.formImg= {
-                   date_rapport:"",
-                   heure_rapport:""
+                   date:"",
+                  // heure_rapport:""
                 }
                 this.$router.push({
-                  name:'liste_fichier'
-                })
+                name:"liste_video"
+                });
             },
 
          OnchangeFichier(e) {
@@ -116,6 +105,11 @@ export default {
                     vm.fichierPDF = e.target.result;
                 };
                 reader.readAsDataURL(file);
+            },
+            allerPage(){
+            this.$router.push({
+                name:"liste_video"
+                });
             },
 
     }

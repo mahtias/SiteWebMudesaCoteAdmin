@@ -3,7 +3,7 @@ import router from '../../../routes/index'
 import { asyncLoading } from 'vuejs-loading-plugin'
 import {token} from "../../../repositories/Auth"
 //import { Message } from 'iview'
-//import { Notice,nodesc,Message } from 'view-design'
+import { Notice,nodesc } from 'view-design'
 
 export function login({commit}, user){
     if(user.email && user.password){
@@ -37,7 +37,7 @@ export function login({commit}, user){
                      commit('SET_LOADER_FALSE')
                   //   //  this.error = false
                      commit('SET_ERROR_TRUE')
-                    //this.$router.push({name: 'login'})
+                    this.$router.push({name: 'login'})
                 }
 
                });
@@ -282,6 +282,10 @@ export function login({commit}, user){
             // console.log("ok ok ok ok ok c'est la vie")
              commit('AJOUTER_MESSAGE', response.data)
             // dispatch('getPersonnel')
+          //   Notice.success({
+          //     title: 'Modification effectué avec success ',
+          //     desc: nodesc ? '' : 'avec success. '
+          // });
              this.$app.$notify({
                title: 'success ',
                text: 'Enregistrement effectué !',
@@ -291,6 +295,37 @@ export function login({commit}, user){
        
          }).catch(error => console.log(error))
        }
+
+       export function modifierMessage({ commit}, element_modifie) {
+        asyncLoading (apiGuest.put('/message/' + element_modifie.id, element_modifie)).then(response => {
+           commit('MODIFIER_MESSAGE', response.data)
+         
+           this.$app.$notify({
+             title: 'success ',
+             text: 'Modification effectué avec success!',
+             type:"success"
+           })
+       
+         }).catch(error => console.log(error))
+       }
+
+
+       export function supprimerMessage({ commit }, id) {
+        this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+          commit('SUPPRIMER_MESSAGE', id)
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Suppression effectué avec success!',
+            type:"success"
+          })
+        // // dialog.loading(false) // stops the proceed button's loader
+        apiGuest.delete('/message/' + id).then(() => dialog.close())
+        }) 
+      
+      
+      }
 
 
 
@@ -347,6 +382,304 @@ export function login({commit}, user){
          // // dialog.loading(false) // stops the proceed button's loader
          apiGuest.delete('/fichier/' + id).then(() => dialog.close())
          }) 
-       
+       }
+
+       /////
+
+       export function getListeAderhent({ commit }) {
+        // console.log(token())
+         apiGuest.get('/adhesion').then((response) => {
+           commit('GET_ALL_LISTE_ADERHENT', response.data)
+           
+         }).catch(error => console.log(error))
        
        }
+
+       export function ajouterAdherant({ commit}, formData) {
+        asyncLoading (apiGuest.post('/adhesion', formData)).then(response => {
+           if (response.status == 201) {
+            // console.log("ok ok ok ok ok c'est la vie")
+             commit('AJOUTER_LISTE_ADERHENT', response.data)
+            // dispatch('getPersonnel')
+             this.$app.$notify({
+               title: 'success ',
+               text: 'Enregistrement effectué !',
+               type:"success"
+             })
+           }
+       
+         }).catch(error => console.log(error))
+       }
+
+         
+       export function modifierAdherant({ commit}, element_modifie) {
+        asyncLoading (apiGuest.put('/adhesion/' + element_modifie.id, element_modifie)).then(response => {
+           commit('MODIFIER_LISTE_ADERHENT', response.data)
+         
+           this.$app.$notify({
+             title: 'success ',
+             text: 'Modification effectué avec success!',
+             type:"success"
+           })
+       
+         }).catch(error => console.log(error))
+       }
+
+       export function supprimerAdherant({ commit }, id) {
+        this.$app.$dialog
+        .confirm("Voulez vouz vraiment supprimer ?.")
+        .then(dialog => {
+          commit('SUPPRIMER_LISTE_ADERHENT', id)
+          this.$app.$notify({
+            title: 'success ',
+            text: 'Suppression effectué avec success!',
+            type:"success"
+          })
+        // // dialog.loading(false) // stops the proceed button's loader
+        apiGuest.delete('/adhesion/' + id).then(() => dialog.close())
+        })
+      }
+
+
+      // action pour les ceremonies
+
+      export function getCeremonie({ commit }) {
+        // console.log(token())
+         apiGuest.get('/ceremonie').then((response) => {
+           commit('GET_ALL_CEREMONIE', response.data)
+         }).catch(error => console.log(error))
+       
+       }
+  
+       
+       export function ajouterCeremonie({ commit}, formData) {
+        asyncLoading (apiGuest.post('/ceremonie', formData)).then(response => {
+           if (response.status == 201) {
+            // console.log("ok ok ok ok ok c'est la vie")
+             commit('AJOUTER_CEREMONIE', response.data)
+            // dispatch('getPersonnel')
+             this.$app.$notify({
+               title: 'success ',
+               text: 'Enregistrement effectué !',
+               type:"success"
+             })
+           }
+       
+         }).catch(error => console.log(error))
+       }
+
+         
+            export function modifierCeremonie({ commit}, element_modifie) {
+              asyncLoading (apiGuest.put('/ceremonie/' + element_modifie.id, element_modifie)).then(response => {
+                commit('MODIFIER_CEREMONIE', response.data)
+                this.$app.$notify({
+                  title: 'success ',
+                  text: 'Modification effectué avec success!',
+                  type:"success"
+                })
+            
+              }).catch(error => console.log(error))
+            }
+   
+          export function supprimerCeremonie({ commit }, id) {
+            this.$app.$dialog
+            .confirm("Voulez vouz vraiment supprimer ?.")
+            .then(dialog => {
+              commit('SUPPRIMER_CEREMONIE', id)
+              this.$app.$notify({
+                title: 'success ',
+                text: 'Suppression effectué avec success!',
+                type:"success"
+              })
+            // // dialog.loading(false) // stops the proceed button's loader
+            apiGuest.delete('/ceremonie/' + id).then(() => dialog.close())
+            }) 
+          }
+
+          // action pour la liste organisation socio
+
+                    export function getOrgsocio({ commit }) {
+                      // console.log(token())
+                      apiGuest.get('/org').then((response) => {
+                        commit('GET_ALL_ORG_SOCIO', response.data)
+                      }).catch(error => console.log(error))
+                    
+                    }
+                
+                    
+                    export function ajouterOrgaSocio({ commit}, formData) {
+                      asyncLoading (apiGuest.post('/org', formData)).then(response => {
+                        if (response.status == 201) {
+                          // console.log("ok ok ok ok ok c'est la vie")
+                          commit('AJOUTER_ORG_SOCIO', response.data)
+                          // dispatch('getPersonnel')
+                            Notice.success({
+                              title: 'Modification effectué ',
+                              desc: nodesc ? '' : 'ajout effectué  avec success. '
+                          });
+                          // this.$app.$notify({
+                          //   title: 'success ',
+                          //   text: 'Enregistrement effectué !',
+                          //   type:"success"
+                          // })
+                        }
+                    
+                      }).catch(error => console.log(error))
+                    }
+              
+                      
+                          export function modifierOrgSocio({ commit}, element_modifie) {
+                            asyncLoading (apiGuest.put('/org/' + element_modifie.id, element_modifie)).then(response => {
+                              commit('MODIFIER_ORG_SOCIO', response.data)
+                              this.$app.$notify({
+                                title: 'success ',
+                                text: 'Modification effectué avec success!',
+                                type:"success"
+                              })
+                          
+                            }).catch(error => console.log(error))
+                          }
+                
+                        export function supprimerOrgSocio({ commit }, id) {
+                          // this.$app.$dialog
+                          // .confirm("Voulez vouz vraiment supprimer ?.")
+                          // .then(dialog => {
+                            commit('SUPPRIMER_ORG_SOCIO', id)
+                            Notice.success({
+                              title: 'Suppression effectué ',
+                              desc: nodesc ? '' : 'Suppression effectué avec success. '
+                          });
+                            // this.$app.$notify({
+                            //   title: 'success ',
+                            //   text: 'Suppression effectué avec success!',
+                            //   type:"success"
+                            // })
+                          // // dialog.loading(false) // stops the proceed button's loader
+                          apiGuest.delete('/org/' + id)
+                          //  .then(() => dialog.close())  }) 
+                        }
+
+                        // action pour image
+
+                        export function getImage({ commit }) {
+                          // console.log(token())
+                          apiGuest.get('/image').then((response) => {
+                            commit('GET_ALL_IMAGE', response.data)
+                          }).catch(error => console.log(error))
+                        
+                        }
+                    
+                        
+                        export function ajouterImage({ commit}, formData) {
+                          asyncLoading (apiGuest.post('/image', formData)).then(response => {
+                            if (response.status == 201) {
+                              // console.log("ok ok ok ok ok c'est la vie")
+                              commit('AJOUTER_IMAGE', response.data)
+                              // dispatch('getPersonnel')
+                                Notice.success({
+                                  title: 'ajout effectué ',
+                                  desc: nodesc ? '' : 'ajout effectué  avec success. '
+                              });
+                              // this.$app.$notify({
+                              //   title: 'success ',
+                              //   text: 'Enregistrement effectué !',
+                              //   type:"success"
+                              // })
+                            }
+                        
+                          }).catch(error => console.log(error))
+                        }
+                  
+                          
+                              export function modifierImage({ commit}, element_modifie) {
+                                asyncLoading (apiGuest.put('/image/' + element_modifie.id, element_modifie)).then(response => {
+                                  commit('MODIFIER_IMAGE', response.data)
+                                  Notice.success({
+                                    title: 'Modification effectué ',
+                                    desc: nodesc ? '' : 'Modification effectué avec success. '
+                                });
+                                  // this.$app.$notify({
+                                  //   title: 'success ',
+                                  //   text: 'Modification effectué avec success!',
+                                  //   type:"success"
+                                  // })
+                              
+                                }).catch(error => console.log(error))
+                              }
+                    
+                            export function supprimerImage({ commit }, id) {
+                              // this.$app.$dialog
+                              // .confirm("Voulez vouz vraiment supprimer ?.")
+                              // .then(dialog => {
+                                commit('SUPPRIMER_IMAGE', id)
+                                Notice.success({
+                                  title: 'Suppression effectué ',
+                                  desc: nodesc ? '' : 'Suppression effectué avec success. '
+                              });
+                              // // dialog.loading(false) // stops the proceed button's loader
+                              apiGuest.delete('/org/' + id)
+                              //  .then(() => dialog.close())  }) 
+                            }
+
+
+                            // action pour la video
+
+                            export function getVideo({ commit }) {
+                              // console.log(token())
+                              apiGuest.get('/video').then((response) => {
+                                commit('GET_ALL_VIDEO', response.data)
+                              }).catch(error => console.log(error))
+                            
+                            }
+                        
+                            
+                            export function ajouterVideo({ commit}, formData) {
+                              asyncLoading (apiGuest.post('/video', formData)).then(response => {
+                                if (response.status == 201) {
+                                  // console.log("ok ok ok ok ok c'est la vie")
+                                  commit('AJOUTER_VIDEO', response.data)
+                                  // dispatch('getPersonnel')
+                                    Notice.success({
+                                      title: 'ajout effectué ',
+                                      desc: nodesc ? '' : 'ajout effectué  avec success. '
+                                  });
+                                }
+                            
+                              }).catch(error => console.log(error))
+                            }
+                      
+                              
+                                  export function modifierVideo({ commit}, element_modifie) {
+                                    asyncLoading (apiGuest.put('/video/' + element_modifie.id, element_modifie)).then(response => {
+                                      commit('MODIFIER_VIDEO', response.data)
+                                      Notice.success({
+                                        title: 'Modification effectué ',
+                                        desc: nodesc ? '' : 'Modification effectué avec success. '
+                                    });
+                                      // this.$app.$notify({
+                                      //   title: 'success ',
+                                      //   text: 'Modification effectué avec success!',
+                                      //   type:"success"
+                                      // })
+                                  
+                                    }).catch(error => console.log(error))
+                                  }
+                        
+                                export function supprimerVideo({ commit }, id) {
+                                  this.$app.$dialog
+                                  .confirm("Voulez vouz vraiment supprimer ?.")
+                                  .then(dialog => {
+                                    commit('SUPPRIMER_VIDEO', id)
+                                    Notice.success({
+                                      title: 'Suppression effectué ',
+                                      desc: nodesc ? '' : 'Suppression effectué avec success. '
+                                  });
+                                    // this.$app.$notify({
+                                    //   title: 'success ',
+                                    //   text: 'Suppression effectué avec success!',
+                                    //   type:"success"
+                                    // })
+                                  // // dialog.loading(false) // stops the proceed button's loader
+                                  apiGuest.delete('/video/' + id).then(() => dialog.close())
+                                     }) 
+                                }
