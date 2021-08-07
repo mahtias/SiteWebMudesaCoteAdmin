@@ -67,7 +67,7 @@
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-outline-light" data-dismiss="modal">Fermer</button>
-              <button type="button" @click.prevent="ajouterMessgeLocal" class="btn btn-outline-light">Valider</button>
+              <button type="button" @click.prevent="ModifierMessageLocal" class="btn btn-outline-light">Modifier</button>
             </div>
           </div>
          

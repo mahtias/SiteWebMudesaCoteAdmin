@@ -356,8 +356,8 @@ export function login({commit}, user){
        }
 
          
-       export function modifierFichier({ commit}, element_modifie) {
-        asyncLoading (apiGuest.put('/fichier/' + element_modifie.id, element_modifie)).then(response => {
+       export function modifierFichier({ commit}, element_modifie,config) {
+        asyncLoading (apiGuest.post('/fichier', element_modifie, config)).then(response => {
            commit('MODIFIER_FICHIER', response.data)
          
            this.$app.$notify({

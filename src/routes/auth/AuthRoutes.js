@@ -16,6 +16,7 @@ import AjoutImage from "../../views/DossierImage/AjoutImage.vue"
 import listeVideo from "../../views/DossierVideo/listeVideo.vue"
 import AjouterVideo from "../../views/DossierVideo/AjouterVideo.vue"
 import listeFichier from "../../views/auth/DossierFichier/listeFichier.vue"
+import modifierFichierJoint from "../../views/auth/DossierFichier/modifierFichierJoint.vue"
 
 const AuthRoutes = [
     {
@@ -102,6 +103,11 @@ const AuthRoutes = [
     path:"/fichier-joint",
     name:"fichier_join",
     component:fichierJoint
+  },
+  {
+    path:"/modif-fichier/:id",
+    name:"modifier_fichier",
+    component:modifierFichierJoint
   }
 
   

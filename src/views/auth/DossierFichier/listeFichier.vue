@@ -47,7 +47,7 @@
                             </button> -->
 
             
-                        <button @click.prevent="modificationModal(item.id)" style="margin-left:-100px;"  class="btn btn-info" type="button"  title="modifier"  @click="modificationModal(index)">
+                        <button @click.prevent="modificationModal(item.id)" style="margin-left:-100px;"  class="btn btn-info" type="button"  title="modifier"  @click="recuperationElementFichier(index)">
                             <i class="fas fa-eye" ></i>
                         </button>
                         
@@ -70,6 +70,7 @@ export default {
          date_rapport:"",
          heure_rapport:""
      },
+     
     //  imagePDF:"",
     //   namePDF:"",
     //   fichierPDF:"",
@@ -103,7 +104,15 @@ export default {
     methods:{
         ...mapActions("Utilisateurs",["supprimerFichier"]),
 
-        
+        modificationModal(id){
+          this.$router.push({
+            path:"/modif-fichier/" + id
+          });
+
+        },
+        recuperationElementFichier(index){
+         this.editFichier = this.gettersFichierJoints[index]
+        }
 
     }
 }

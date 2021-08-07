@@ -56,7 +56,7 @@
                 </div>
                 <!-- /.card-body        -->
                 <div class="card-footer">
-                  <button type="" @click.prevent="ajouterLocal" class="btn btn-info" style="margin-left:300px;">Modifier</button>
+                  <button type="" @click.prevent="modifierAdhesionLocal" class="btn btn-info" style="margin-left:300px;">Modifier</button>
                   <button type=""  class="btn btn-danger" style="margin-left:50px;" @click.prevent="allerPage">Fermer</button>
                 </div>
                 <!-- /.card-footer -->
@@ -70,7 +70,16 @@ export default {
     data() {
         return{
 
-            editAdherant:{},
+            editAdherant:{
+              nom_adherant:"",
+              prenom_adherant:"",
+              montant_adherant:"",
+              numero_telephone:"",
+              profession:"",
+              date_naissance:"",
+              date_creation:"",
+              message:""
+            },
             detailEdit:""
        
         }
@@ -86,7 +95,24 @@ computed:{
    ...mapGetters("Utilisateurs",[ "gettersListeAderhent"]),
 },
 methods:{
-  ...mapActions("Utilisateurs",[""]),
+  ...mapActions("Utilisateurs",["modifierAdherant"]),
+
+  modifierAdhesionLocal(){
+  this.modifierAdherant(this.editAdherant)
+  this.editAdherant={
+               nom_adherant:"",
+              prenom_adherant:"",
+              montant_adherant:"",
+              numero_telephone:"",
+              profession:"",
+              date_naissance:"",
+              date_creation:"",
+              message:""
+  }
+  this.$router.push({
+      name:'liste_aderhent'
+    });
+  },
 
   allerPage(){
     this.$router.push({

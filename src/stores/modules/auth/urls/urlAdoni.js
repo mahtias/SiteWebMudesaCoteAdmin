@@ -1,8 +1,8 @@
 import axios from 'axios'
 
  export default axios.create({
-   // baseURL: 'http://localhost:8088/api'
-   baseURL: 'http://127.0.0.1:4000/api/auth'
+    baseURL: 'http://localhost:4000/api/auth'
+   //baseURL: 'https://agosoftprojet.com/api/auth'
 
 })
 
